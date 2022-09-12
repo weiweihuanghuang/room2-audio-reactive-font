@@ -107,4 +107,7 @@ dist
 fonts/
 
 # sound
-sod.mp3
+*.mp3
+
+# working files
+Backup/

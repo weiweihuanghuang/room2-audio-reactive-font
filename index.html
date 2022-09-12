@@ -44,12 +44,15 @@
       </fieldset>
       <span>Bass</span>
       <input type="range" id="bass-slider" min="0" max="100" value="0" />
+      <output id="bass-num">0</output>
       <span>Mid</span>
       <input type="range" id="mid-slider" min="0" max="100" value="0" />
+      <output id="mid-num">0</output>
       <span>Hi</span>
       <input type="range" id="hi-slider" min="0" max="100" value="0" />
+      <output id="hi-num">0</output>
       <audio src="./sod.mp3" id="audioSource" onplay="startAnalyser()" onpause="stopAnalyser()" controls >
-      
+      </audio>
       </div>
       
     </body>

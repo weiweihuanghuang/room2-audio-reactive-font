@@ -57,9 +57,9 @@ function audioInit() {
       document.getElementById('axis-sliders-wrapper').appendChild(feedbackText);
       feedbackTexts.push(feedbackText);
     }
-    bassSlider = document.getElementById("bass-slider");
-    midSlider = document.getElementById("mid-slider");
-    hiSlider = document.getElementById("hi-slider");
+    bassSlider = document.getElementById("bass-slider"); bassNum = document.getElementById("bass-num");
+    midSlider = document.getElementById("mid-slider"); midNum = document.getElementById("mid-num");
+    hiSlider = document.getElementById("hi-slider"); hiNum = document.getElementById("hi-num");
 }
 
 function startAnalyser(){
@@ -87,32 +87,41 @@ function analyseAudio(){
   // to change to other variables change "--font-var-one"
   // to change to other frequency band change the number in audioDataArray[15] to something between 0 and 15
   //changeRootVar("--font-var-one", audioDataArray[15]/2.56);
-  let hiVol = 0;
-  for (let i = 8; i < 11; i++){
-    hiVol += audioDataArray[i]/2.56;
-  }
-  hiVol = dataRangeMod(hiVol/4, 50, 2);
-  hiSlider.value = hiVol;
-  let midVol = 0;
-  for (let i = 5; i < 8; i++){
-    midVol += audioDataArray[i]/2.56;
-  }
-  midVol = dataRangeMod(midVol/3, 50, 2);
-  midSlider.value = midVol;
   let bassVol = 0;
   for (let i = 0; i < 5; i++){
     bassVol += audioDataArray[i]/2.56;
   }
-  bassVol = dataRangeMod(bassVol/5, 50, 2);
-  bassSlider.value = bassVol;
+  bassVol = dataRangeMod(bassVol/5, 70, 95);
+  bassSlider.value = bassNum.value = bassVol;
+
+  let midVol = 0;
+  for (let i = 5; i < 8; i++){
+    midVol += audioDataArray[i]/2.56;
+  }
+  midVol = dataRangeMod(midVol/3, 65, 90);
+  midSlider.value = midNum.value = midVol;
+
+  let hiVol = 0;
+  for (let i = 8; i < 11; i++){
+    hiVol += audioDataArray[i]/2.56;
+  }
+  hiVol = dataRangeMod(hiVol/4, 35, 65);
+  hiSlider.value = hiNum.value = hiVol;
+
   //changeRootVar("--font-var-one", bassVol);
   //changeRootVar("--font-var-one", midVol);
   //changeRootVar("--font-var-one", hiVol);
   // the above lines have no data finessing, to create a usable range I've added and extra function to the volume
   changeRootVar("--font-var-one", bassVol);
+  changeRootVar("--font-var-two", midVol);
+  changeRootVar("--font-var-three", hiVol);
   if(isAnalysing){ requestAnimationFrame(analyseAudio); }
 }
 
-function dataRangeMod(input, floor, range){
-  return (input - floor) * range;
+// function dataRangeMod(input, floor, range){
+//   return (input - floor) * range;
+// }
+
+function dataRangeMod(input, floor, ceiling){
+  return (input-floor)/(ceiling-floor)*100
 }
