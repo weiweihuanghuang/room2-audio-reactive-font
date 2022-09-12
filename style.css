@@ -36,7 +36,9 @@
 }
 
 #font-wrapper{
-  width: 100%;
+  margin: auto;
+  width: 50%;
+  text-align: center;
   height: 100vh;
   display: flex;
   align-items: center;

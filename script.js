@@ -39,7 +39,7 @@ function audioInit() {
     // add smoothing
     // you can play with this one - https://developer.mozilla.org/en-US/docs/Web/API/AnalyserNode/smoothingTimeConstant
     // good range is 0.9 - 0.9999
-    analyser.smoothingTimeConstant = 0.97;
+    analyser.smoothingTimeConstant = 0.98;
     // add smoothing
     // you can change this - tldr needs to be power of 2 - higher value is more pitch accurate but less time accurate - https://developer.mozilla.org/en-US/docs/Web/API/AnalyserNode/fftSize
     analyser.fftSize = 32;
@@ -91,21 +91,24 @@ function analyseAudio(){
   for (let i = 0; i < 5; i++){
     bassVol += audioDataArray[i]/2.56;
   }
-  bassVol = dataRangeMod(bassVol/5, 70, 95);
+  // bassVol = dataRangeMod(bassVol/5, 0, 100);
+  bassVol = dataRangeMod(bassVol/5, 80, 92);
   bassSlider.value = bassNum.value = bassVol;
 
   let midVol = 0;
   for (let i = 5; i < 8; i++){
     midVol += audioDataArray[i]/2.56;
   }
-  midVol = dataRangeMod(midVol/3, 65, 90);
+  // midVol = dataRangeMod(midVol/3, 0, 100);
+  midVol = dataRangeMod(midVol/3, 70, 80);
   midSlider.value = midNum.value = midVol;
 
   let hiVol = 0;
   for (let i = 8; i < 11; i++){
     hiVol += audioDataArray[i]/2.56;
   }
-  hiVol = dataRangeMod(hiVol/4, 35, 65);
+  // hiVol = dataRangeMod(hiVol/4, 0, 100);
+  hiVol = dataRangeMod(hiVol/4, 48, 58);
   hiSlider.value = hiNum.value = hiVol;
 
   //changeRootVar("--font-var-one", bassVol);
